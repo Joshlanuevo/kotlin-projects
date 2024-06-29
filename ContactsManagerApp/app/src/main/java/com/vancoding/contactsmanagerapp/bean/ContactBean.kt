@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "contacts_table")
 data class ContactBean(
     @PrimaryKey(autoGenerate = true)
-    val id : Int,
-    val name : String,
-    val email : String
+    var id : Int,
+    var name : String,
+    var email : String
 )
