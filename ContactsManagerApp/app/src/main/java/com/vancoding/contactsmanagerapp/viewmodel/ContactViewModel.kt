@@ -63,6 +63,7 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
         repository.deleteAll();
     }
 
+    // Detecting if inserting or updating a new contact in the database.
     fun saveOrUpdate() {
         if (isUpdateOrDelete) {
             // Make an update:
@@ -82,11 +83,30 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
         }
     }
 
+    // Detecting if delete or clear all functionality
     fun clearAllOrDelete() {
         if (isUpdateOrDelete) {
             delete(contactToUpdateOrDelete);
         } else {
             clearAll();
         }
+    }
+
+    // Detect if this an update or delete function
+    fun initUpdateAndDelete(contact: ContactBean) {
+        inputName.value = contact.name;
+        inputName.value = contact.email;
+        isUpdateOrDelete = true;
+        contactToUpdateOrDelete = contact;
+        saveOrUpdateButtonText.value = "Update";
+        clearAllOrDeleteButtonText.value = "Delete";
+    }
+
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+        TODO("Not yet implemented")
     }
 }
