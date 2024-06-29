@@ -1,6 +1,7 @@
 package com.vancoding.contactsmanagerapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,9 +10,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vancoding.contactsmanagerapp.bean.ContactBean
 import com.vancoding.contactsmanagerapp.databinding.ActivityMainBinding
 import com.vancoding.contactsmanagerapp.db.ContactDb
 import com.vancoding.contactsmanagerapp.repository.ContactRepository
+import com.vancoding.contactsmanagerapp.view.MyRecyclerViewAdapter
 import com.vancoding.contactsmanagerapp.viewmodel.ContactViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -52,7 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun DisplayUsersList() {
         contactViewModel.contacts.observe(this, Observer {
-
+            binding.recyclerView.adapter = MyRecyclerViewAdapter(
+                it, { selectedItem: ContactBean -> listItemClicked(selectedItem) }
+            )
         })
+    }
+
+    private fun listItemClicked(selectedItem: ContactBean) {
+        Toast.makeText(this, "Selected name is ${selectedItem.name}", Toast.LENGTH_LONG).show();
+        contactViewModel.initUpdateAndDelete(selectedItem);
     }
 }
