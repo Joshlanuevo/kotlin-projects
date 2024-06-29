@@ -68,7 +68,7 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
         if (isUpdateOrDelete) {
             // Make an update:
             contactToUpdateOrDelete.name = inputName.value!!
-            contactToUpdateOrDelete.email = inputName.value!!
+            contactToUpdateOrDelete.email = inputEmail.value!!
             update(contactToUpdateOrDelete);
         } else {
             // Inserting a new contact
@@ -95,7 +95,7 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
     // Detect if this an update or delete function
     fun initUpdateAndDelete(contact: ContactBean) {
         inputName.value = contact.name;
-        inputName.value = contact.email;
+        inputEmail.value = contact.email;
         isUpdateOrDelete = true;
         contactToUpdateOrDelete = contact;
         saveOrUpdateButtonText.value = "Update";
@@ -103,10 +103,10 @@ class ContactViewModel(private val repository: ContactRepository) : ViewModel(),
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-        TODO("Not yet implemented")
+
     }
 }

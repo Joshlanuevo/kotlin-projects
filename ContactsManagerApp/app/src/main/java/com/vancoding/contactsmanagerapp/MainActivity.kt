@@ -16,6 +16,7 @@ import com.vancoding.contactsmanagerapp.db.ContactDb
 import com.vancoding.contactsmanagerapp.repository.ContactRepository
 import com.vancoding.contactsmanagerapp.view.MyRecyclerViewAdapter
 import com.vancoding.contactsmanagerapp.viewmodel.ContactViewModel
+import com.vancoding.contactsmanagerapp.viewmodel.ContactViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding;
@@ -36,9 +37,10 @@ class MainActivity : AppCompatActivity() {
         // ROOM Database
         val dao = ContactDb.getInstance(applicationContext).contactDao;
         val repository = ContactRepository(dao);
+        val factory = ContactViewModelFactory(repository);
 
         // View Model
-        contactViewModel = ViewModelProvider(this).get(ContactViewModel::class.java);
+        contactViewModel = ViewModelProvider(this, factory).get(ContactViewModel::class.java);
 
         binding.contactViewModel = contactViewModel;
 
