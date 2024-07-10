@@ -55,4 +55,7 @@ dependencies {
 
     // Real-time database
     implementation("com.google.firebase:firebase-database")
+
+    // Firestrore
+    implementation("com.google.firebase:firebase-firestore")
 }
