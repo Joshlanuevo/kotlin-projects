@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.google.firebase.database.getValue
 
 class MainActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val textView: TextView = findViewById(R.id.textView);
+
         // Real Time Database Reference
         // https://fir-kotlin-e57f6-default-rtdb.firebaseio.com/
         database = Firebase.database.reference
@@ -33,6 +36,18 @@ class MainActivity : AppCompatActivity() {
         val user1 = User("Ivan", "1234");
         database.child("Users").setValue(user1);
 
+        // Reading custom objects to firebase
+        val pe = object :ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val u1 = snapshot.getValue<User>()
+                textView.text = u1.toString();
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        }
+
+        database.child("Users").addValueEventListener(pe)
 
 
 //        val textView: TextView = findViewById(R.id.textView);
