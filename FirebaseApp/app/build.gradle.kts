@@ -52,4 +52,7 @@ dependencies {
 
     // Firebase Analytics
     implementation("com.google.firebase:firebase-analytics")
+
+    // Real-time database
+    implementation("com.google.firebase:firebase-database")
 }
