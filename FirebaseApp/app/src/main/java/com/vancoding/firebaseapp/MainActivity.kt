@@ -27,30 +27,70 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val db = Firebase.firestore
-
         val textView: TextView = findViewById(R.id.textView);
 
-        // Real Time Database Reference
-        // https://fir-kotlin-e57f6-default-rtdb.firebaseio.com/
-        database = Firebase.database.reference
+        // Initialize firestore
+        val db = Firebase.firestore
 
-        // Writing custom objects to firebase
-        val user1 = User("Ivan", "1234");
-        database.child("Users").setValue(user1);
+        // Creating a Collection: "User"
+        val users_collection = db.collection("Users")
 
-        // Reading custom objects to firebase
-        val pe = object :ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val u1 = snapshot.getValue<User>()
-                textView.text = u1.toString();
-            }
+        // Creating Documents:
+        // Document one
+        val user1 = hashMapOf(
+            "name" to "jack",
+            "lname" to "reacher",
+            "born" to "1992"
+        )
 
-            override fun onCancelled(error: DatabaseError) {
+        // Document two
+        val user2 = hashMapOf(
+            "name" to "john",
+            "lname" to "travolta",
+            "born" to "1992"
+        )
+
+        // Adding Documents to Collection
+        users_collection.document("user1").set(user1)
+        users_collection.document("user2").set(user2)
+
+        // Receive Documents from Firestore
+        val docRef = db.collection("Users").document("user1")
+
+        // Getting specific data from Document
+        docRef.get().addOnSuccessListener { document ->
+            if (document != null) {
+                textView.text = "${document.data}"
             }
         }
 
-        database.child("Users").addValueEventListener(pe)
+
+
+
+//     // Firebase section ↓ ↓ ↓
+
+//        val textView: TextView = findViewById(R.id.textView);
+//
+//        // Real Time Database Reference
+//        // https://fir-kotlin-e57f6-default-rtdb.firebaseio.com/
+//        database = Firebase.database.reference
+//
+//        // Writing custom objects to firebase
+//        val user1 = User("Ivan", "1234");
+//        database.child("Users").setValue(user1);
+//
+//        // Reading custom objects to firebase
+//        val pe = object :ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                val u1 = snapshot.getValue<User>()
+//                textView.text = u1.toString();
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//            }
+//        }
+//
+//        database.child("Users").addValueEventListener(pe)
 
 
 //        val textView: TextView = findViewById(R.id.textView);
