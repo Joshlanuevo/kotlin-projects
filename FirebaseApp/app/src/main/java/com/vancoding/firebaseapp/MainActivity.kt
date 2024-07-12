@@ -32,6 +32,12 @@ class MainActivity : AppCompatActivity() {
         // Initialize firestore
         val db = Firebase.firestore
 
+        // Updating the Data in Document
+        db.collection("Users")
+            .document("user1")
+//            .update("born", "2000")
+//            .delete()
+
         // Creating a Collection: "User"
         val users_collection = db.collection("Users")
 
@@ -51,8 +57,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         // Adding Documents to Collection
-        users_collection.document("user1").set(user1)
-        users_collection.document("user2").set(user2)
+//        users_collection.document("user1").set(user1)
+//        users_collection.document("user2").set(user2)
 
 //        // Receive Documents from Firestore
 //        val docRef = db.collection("Users").document("user1")
