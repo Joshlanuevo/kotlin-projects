@@ -54,16 +54,25 @@ class MainActivity : AppCompatActivity() {
         users_collection.document("user1").set(user1)
         users_collection.document("user2").set(user2)
 
-        // Receive Documents from Firestore
-        val docRef = db.collection("Users").document("user1")
+//        // Receive Documents from Firestore
+//        val docRef = db.collection("Users").document("user1")
+//
+//        // Getting specific data from Document
+//        docRef.get().addOnSuccessListener { document ->
+//            if (document != null) {
+//                textView.text = "${document.data}"
+//            }
+//        }
 
-        // Getting specific data from Document
-        docRef.get().addOnSuccessListener { document ->
-            if (document != null) {
-                textView.text = "${document.data}"
+        var allDocuments = ""
+
+        // Getting all Documents from Collection
+        db.collection("Users").get().addOnSuccessListener { result ->
+            for (document in result) {
+                allDocuments += "${document.data}"
             }
+            textView.text = ""+allDocuments
         }
-
 
 
 
