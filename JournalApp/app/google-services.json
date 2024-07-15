@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "433507576734",
+    "project_id": "journalkotlin-999ab",
+    "storage_bucket": "journalkotlin-999ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433507576734:android:dfb45a88e82dcfd721848f",
+        "android_client_info": {
+          "package_name": "com.vancoding.journalapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGPuoUwbHZqqLup3LoayHcmfj2MMJAQR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
