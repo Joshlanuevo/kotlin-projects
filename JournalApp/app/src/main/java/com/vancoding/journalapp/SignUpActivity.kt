@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.vancoding.journalapp.databinding.ActivitySignUpBinding
 
@@ -22,14 +23,13 @@ class SignUpActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
 
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -64,6 +64,10 @@ class SignUpActivity : AppCompatActivity() {
             }
     }
 
+    private fun updateUI(user: FirebaseUser?) {
+
+    }
+
     // When initializing your Activity, check to see if the user is currently signed in:
     public override fun onStart() {
         super.onStart()
@@ -72,5 +76,9 @@ class SignUpActivity : AppCompatActivity() {
         if (currentUser != null) {
             reload()
         }
+    }
+
+    public fun reload() {
+
     }
 }
