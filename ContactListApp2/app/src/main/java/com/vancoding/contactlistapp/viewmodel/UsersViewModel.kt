@@ -1,6 +1,5 @@
 package com.vancoding.contactlistapp.viewmodel
 
-import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.vancoding.contactlistapp.base.BaseViewModel
 import com.vancoding.contactlistapp.bean.UsersBean
