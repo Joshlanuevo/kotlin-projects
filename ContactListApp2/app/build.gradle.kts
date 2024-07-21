@@ -57,6 +57,10 @@ dependencies {
      * */
     implementation("com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-ktx:2.1.0")
 
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
     val room_version = "2.6.1"
 
     implementation("androidx.room:room-runtime:$room_version")
