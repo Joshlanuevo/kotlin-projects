@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import androidx.lifecycle.viewModelScope
+import com.vancoding.contactlistapp.bean.UsersBean
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlin.coroutines.coroutineContext
@@ -15,14 +16,14 @@ import kotlin.coroutines.coroutineContext
  * Time:15:47
  */
 
-abstract class BaseViewModel<T> : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
     val SUCCESS = 200
 
     sealed class LoadState<T>(
         val hasMore: Boolean = false,
         val isRefresh: Boolean = false,
         val isPull2Refresh: Boolean = false,
-        var exc: Throwable? = null,
+        val exc: Throwable? = null,
         val data: T? = null,
         val dataOld: T? = null,
     ) {
@@ -38,9 +39,12 @@ abstract class BaseViewModel<T> : ViewModel() {
             isRefresh: Boolean = false,
             isPull2Refresh: Boolean = false,
             hasMore: Boolean = true,
-        ) : LoadState<T> (
-            data = data,dataOld = dataOld,isRefresh = isRefresh,
-            isPull2Refresh = isPull2Refresh,hasMore = hasMore
+        ) : LoadState<T>(
+            data = data,
+            dataOld = dataOld,
+            isRefresh = isRefresh,
+            isPull2Refresh = isPull2Refresh,
+            hasMore = hasMore
         )
     }
 
@@ -55,9 +59,7 @@ abstract class BaseViewModel<T> : ViewModel() {
                 onStart?.invoke()
                 block()
             } catch (e: Throwable) {
-                if (onError != null) {
-                    onError(e)
-                }
+                onError?.invoke(e)
             } finally {
                 onFinally?.invoke()
             }

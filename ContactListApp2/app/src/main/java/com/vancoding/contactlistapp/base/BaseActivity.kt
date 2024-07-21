@@ -6,6 +6,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
+
 abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
@@ -19,13 +20,11 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * Set the status bar to be transparent for an immersive experience
+     * For status bar transparency
      */
     open fun setTranslucentStatus() {
-        // Starting from Android 5.x, the color needs to be set to transparent; otherwise, the navigation bar will be the default light gray color
         val window = window;
         val decorView = window.decorView;
-        // Starting from Android 5.x, the color needs to be set to transparent; otherwise, the navigation bar will be the default light gray color
         decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
