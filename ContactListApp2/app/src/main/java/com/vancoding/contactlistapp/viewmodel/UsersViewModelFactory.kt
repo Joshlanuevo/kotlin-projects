@@ -4,6 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.vancoding.contactlistapp.repository.UsersRepository
 
+/**
+ * @Reference
+ * @author: Mullatoez
+ * @date : Mar 30, 2023
+ * */
 class UsersViewModelFactory(
     private val repository: UsersRepository
 ) : ViewModelProvider.Factory {

@@ -9,6 +9,13 @@ class UserInfoActivity : BaseActivity() {
     private val bindView: ActivityUserInfoBinding by binding()
 
     override fun initView() {
+        bindView.toolbar.run {
+            viewBack.setOnClickListener {
+                finish()
+            }
+            tvTitle.text = "User Info"
+        }
+
         val email = intent.getStringExtra("email")
         val firstName = intent.getStringExtra("first_name")
         val lastName = intent.getStringExtra("last_name")
