@@ -16,9 +16,9 @@ import com.vancoding.contactlistapp.ui.UserInfoActivity
 class UsersAdapter(private val users: List<UsersBean>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
 
     class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val email: TextView = view.findViewById(R.id.email)
-        val name: TextView = view.findViewById(R.id.name)
-        val avatar: ImageView = view.findViewById(R.id.avatar)
+        val email: TextView = view.findViewById(R.id.userEmail)
+        val name: TextView = view.findViewById(R.id.userName)
+        val avatar: ImageView = view.findViewById(R.id.userAvatar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

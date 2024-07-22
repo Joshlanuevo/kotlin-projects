@@ -29,8 +29,8 @@ class HomeActivity : BaseActivity() {
         mviewModel = ViewModelProvider(this, UsersViewModelFactory(mRepository)) [UsersViewModel::class.java]
 
         mAdapter = UsersAdapter(emptyList())
-        bindView.recyclerView.layoutManager = LinearLayoutManager(this)
-        bindView.recyclerView.adapter = mAdapter
+        bindView.listUsers.layoutManager = LinearLayoutManager(this)
+        bindView.listUsers.adapter = mAdapter
     }
 
     override fun requestData() {
@@ -44,7 +44,7 @@ class HomeActivity : BaseActivity() {
 //                    val usersList = loadState.data ?: emptyList()
 //                    mAdapter = UsersAdapter(usersList)
 //                    bindView.recyclerView.adapter = mAdapter
-                    bindView.recyclerView.adapter = loadState.data?.let { UsersAdapter(it) }
+                    bindView.listUsers.adapter = loadState.data?.let { UsersAdapter(it) }
                     bindView.swipeLayout.isRefreshing = false
 //                    Log.d("HomeActivity", "Users displayed: $usersList")
                 }
