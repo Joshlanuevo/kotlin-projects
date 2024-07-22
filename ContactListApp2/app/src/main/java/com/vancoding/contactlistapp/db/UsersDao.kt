@@ -6,6 +6,11 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.vancoding.contactlistapp.bean.UsersBean
 
+/**
+ * @Reference
+ * @source : Udemy
+ * @author : abbas masri
+ */
 @Dao
 interface UsersDao {
     @Query("SELECT * FROM users")

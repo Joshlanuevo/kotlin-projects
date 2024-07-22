@@ -7,9 +7,9 @@ import retrofit2.http.GET
 
 /**
  * @Reference
- * @author: Mullatoez
- * @date : Mar 30, 2023
- * */
+ * @source : Udemy
+ * @author : abbas masri
+ */
 
 interface ApiUrl {
     @GET("/api/users")

@@ -38,15 +38,11 @@ class HomeActivity : BaseActivity() {
     }
 
     override fun observeCallBack() {
-        mviewModel.usersLiveData.observe(this) { loadState ->
-            when (loadState) {
+        mviewModel.usersLiveData.observe(this) { userListData ->
+            when (userListData) {
                 is BaseViewModel.LoadState.Success -> {
-//                    val usersList = loadState.data ?: emptyList()
-//                    mAdapter = UsersAdapter(usersList)
-//                    bindView.recyclerView.adapter = mAdapter
-                    bindView.listUsers.adapter = loadState.data?.let { UsersAdapter(it) }
+                    bindView.listUsers.adapter = userListData.data?.let { UsersAdapter(it) }
                     bindView.swipeLayout.isRefreshing = false
-//                    Log.d("HomeActivity", "Users displayed: $usersList")
                 }
                 is BaseViewModel.LoadState.Fail -> {}
                 is BaseViewModel.LoadState.Loading -> {}

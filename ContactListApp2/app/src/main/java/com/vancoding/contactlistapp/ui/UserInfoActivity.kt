@@ -2,6 +2,7 @@ package com.vancoding.contactlistapp.ui
 
 import com.bumptech.glide.Glide
 import com.dylanc.viewbinding.binding
+import com.vancoding.contactlistapp.R
 import com.vancoding.contactlistapp.base.BaseActivity
 import com.vancoding.contactlistapp.databinding.ActivityUserInfoBinding
 
@@ -13,7 +14,7 @@ class UserInfoActivity : BaseActivity() {
             viewBack.setOnClickListener {
                 finish()
             }
-            tvTitle.text = "User Info"
+            tvTitle.text = getString(R.string.user_info_title)
         }
 
         val email = intent.getStringExtra("email")
@@ -21,6 +22,7 @@ class UserInfoActivity : BaseActivity() {
         val lastName = intent.getStringExtra("last_name")
         val avatar = intent.getStringExtra("avatar")
 
+        bindView.tvNickName.text = firstName
         bindView.userInfoEmail.text = email
         bindView.userInfoName.text = "$firstName $lastName"
         Glide.with(this).load(avatar).circleCrop().into(bindView.userInfoAvatar)

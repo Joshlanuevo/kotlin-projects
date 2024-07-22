@@ -38,6 +38,19 @@ android {
     viewBinding {
         enable = true
     }
+    applicationVariants.all {
+        val variant = this
+        variant.outputs.all {
+            val output = this
+            val appName = "Contacts"
+            val buildType = variant.buildType.name
+            val versionCode = variant.versionCode
+            val versionName = variant.versionName
+
+            val apkName = "${appName}-${buildType}-v${versionName}-${versionCode}.apk"
+            (output as com.android.build.gradle.internal.api.ApkVariantOutputImpl).outputFileName = apkName
+        }
+    }
 }
 
 dependencies {
@@ -87,5 +100,4 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.40.5")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
-
 }

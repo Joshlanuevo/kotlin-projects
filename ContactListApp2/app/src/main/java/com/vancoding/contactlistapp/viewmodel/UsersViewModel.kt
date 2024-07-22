@@ -1,10 +1,16 @@
 package com.vancoding.contactlistapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.vancoding.contactlistapp.base.BaseViewModel
 import com.vancoding.contactlistapp.bean.UsersBean
 import com.vancoding.contactlistapp.repository.UsersRepository
 
+/**
+ * @Reference
+ * @source : Live700 code
+ * @author : N/A
+ */
 class UsersViewModel(private val usersRepository: UsersRepository) : BaseViewModel() {
     val usersLiveData = MutableLiveData<LoadState<List<UsersBean>>>()
 

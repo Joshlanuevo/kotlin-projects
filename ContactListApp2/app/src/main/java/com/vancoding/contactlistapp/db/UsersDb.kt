@@ -6,6 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.vancoding.contactlistapp.bean.UsersBean
 
+/**
+ * @Reference
+ * @source : Udemy
+ * @author : abbas masri
+ */
+
 @Database(entities = [UsersBean::class], version = 1)
 abstract class UsersDb : RoomDatabase() {
     abstract fun usersDao() : UsersDao
@@ -23,7 +29,7 @@ abstract class UsersDb : RoomDatabase() {
             return Room.databaseBuilder(
                 context.applicationContext,
                 UsersDb::class.java,
-                "users_database"
+                "users_db"
             ).build()
         }
     }

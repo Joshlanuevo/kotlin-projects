@@ -13,10 +13,14 @@ import com.vancoding.contactlistapp.R
 import com.vancoding.contactlistapp.bean.UsersBean
 import com.vancoding.contactlistapp.ui.UserInfoActivity
 
+/**
+ * @Reference
+ * @source : Udemy
+ * @author : abbas masri
+ */
 class UsersAdapter(private val users: List<UsersBean>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
 
     class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val email: TextView = view.findViewById(R.id.userEmail)
         val name: TextView = view.findViewById(R.id.userName)
         val avatar: ImageView = view.findViewById(R.id.userAvatar)
     }
@@ -28,11 +32,10 @@ class UsersAdapter(private val users: List<UsersBean>) : RecyclerView.Adapter<Us
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = users[position]
-        holder.email.text = user.email
-        holder.name.text = "${user.first_name} ${user.last_name}"
+        holder.name.text = user.first_name
         Glide.with(holder.avatar.context)
             .load(user.avatar)
-            .apply(RequestOptions.circleCropTransform()) // Apply circular crop
+            .apply(RequestOptions.circleCropTransform())
             .into(holder.avatar)
 
         holder.itemView.setOnClickListener {

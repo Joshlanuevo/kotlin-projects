@@ -7,14 +7,18 @@ import com.vancoding.contactlistapp.db.UsersDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+ * @Reference
+ * @source : Udemy
+ * @author : abbas masri
+ */
 class UsersRepository(private val usersApi: ApiUrl, private val usersDao: UsersDao) {
-    suspend fun getUsersList(): List<UsersBean> {
-        return try {
+    suspend fun getUsersList(): List<UsersBean> = withContext(Dispatchers.IO) {
+        return@withContext try {
             val response = usersApi.getUsersList().execute()
             if (response.isSuccessful) {
                 val users = response.body()?.data ?: emptyList()
                 usersDao.insertAll(users)
-                Log.d("UsersRepository", "List of users: $users")
                 users
             } else {
                 usersDao.getAllUsers()
