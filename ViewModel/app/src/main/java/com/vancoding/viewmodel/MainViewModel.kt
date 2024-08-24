@@ -7,6 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
+
+
     fun getUserData() {
         viewModelScope.launch {
             // write some code
