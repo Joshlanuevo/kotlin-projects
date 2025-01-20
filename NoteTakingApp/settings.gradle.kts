@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "NoteTakingApp"
 include(":app")
- 
+include(":app:core")
+include(":core")
