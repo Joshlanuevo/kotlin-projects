@@ -1,18 +1,18 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("androidx.navigation.safeargs.kotlin")
-    id("kotlin-kapt")
+    alias(libs.plugins.navigation.safeargs)
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "com.vancoding.notetakingapp"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.vancoding.notetakingapp"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -35,6 +35,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    applicationVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -46,22 +53,22 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    implementation(libs.androidx.recyclerview)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.ui)
-    implementation(libs.lifecycle.extensions)
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.coroutines.android)
+    // Glide
+    implementation(libs.glide)
+    ksp(libs.glide.compiler)
+
+    // Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    implementation(libs.legacy.support)
+    ksp(libs.room.compiler)
 
-    kapt(libs.room.compiler)
+    // Navigation
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
 
-    implementation(libs.dagger.core)
-    implementation(libs.dagger.android)
-    kapt(libs.dagger.compiler)
-    kapt(libs.dagger.android.processor)
+    // Dagger
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
