@@ -20,11 +20,11 @@ import androidx.navigation.Navigation
 import com.vancoding.core.data.Note
 import com.vancoding.notetakingapp.R
 import com.vancoding.notetakingapp.databinding.FragmentNoteBinding
-import com.vancoding.notetakingapp.viewmodel.NoteViewmodel
+import com.vancoding.notetakingapp.viewmodel.NoteViewModel
 
 class NoteFragment : Fragment() {
     private lateinit var bindView: FragmentNoteBinding
-    private lateinit var viewModel: NoteViewmodel
+    private lateinit var viewModel: NoteViewModel
     private var currentNote = Note("", "", 0L, 0L)
     private var noteId = 0L
 
@@ -45,7 +45,7 @@ class NoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(NoteViewmodel::class.java)
+        viewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
         arguments?.let {
             noteId = NoteFragmentArgs.fromBundle(it).noteId
