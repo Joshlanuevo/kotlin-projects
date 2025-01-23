@@ -27,7 +27,7 @@ class NoteViewmodel(application: Application): AndroidViewModel(application) {
         RemoveNote(repository),
     )
 
-    private val saved = MutableLiveData<Boolean>()
+    val saved = MutableLiveData<Boolean>()
 
     fun saveNote(note: Note) {
         coroutineScope.launch {
