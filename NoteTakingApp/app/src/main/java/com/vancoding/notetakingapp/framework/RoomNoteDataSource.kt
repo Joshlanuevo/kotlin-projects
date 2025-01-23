@@ -13,7 +13,6 @@ class RoomNoteDataSource(context: Context): NoteDataSource {
 
     override suspend fun get(id: Long) = noteDao.getNoteEntity(id)?.toNote()
 
-
     override suspend fun getAll() = noteDao.getAllNoteEntities().map { it.toNote() }
 
     override suspend fun remove(note: Note) = noteDao.deleteNoteEntity(NoteEntity.fromNote(note))
