@@ -53,9 +53,11 @@ class ListFragment : Fragment(), ListAction {
 
     private fun observeViewModel() {
         viewModel.noteList.observe(viewLifecycleOwner) { noteList ->
-            bindView.loadingView.visibility = View.GONE
-            bindView.noteListView.visibility = View.VISIBLE
-            notesListAdapter.updateNotes(noteList.sortedByDescending { it.updateTime })
+            bindView.apply {
+                loadingView.visibility = View.GONE
+                noteListView.visibility = View.VISIBLE
+                notesListAdapter.updateNotes(noteList.sortedByDescending { it.updateTime })
+            }
         }
     }
 

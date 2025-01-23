@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,7 @@ class NoteFragment : Fragment() {
     private lateinit var bindView: FragmentNoteBinding
     private lateinit var viewModel: NoteViewmodel
     private var currentNote = Note("", "", 0L, 0L)
+    private var noteId = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,14 +35,23 @@ class NoteFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(NoteViewmodel::class.java)
 
+        arguments?.let {
+            noteId = NoteFragmentArgs.fromBundle(it).noteId
+            if (noteId != 0L) {
+                viewModel.getNote(noteId)
+            }
+        }
+
         bindView.checkButton.setOnClickListener {
             if (bindView.titleView.text.toString() != "" || bindView.contentView.text.toString() != "") {
                 val time = System.currentTimeMillis()
-                currentNote.title = bindView.titleView.text.toString()
-                currentNote.content = bindView.contentView.text.toString()
-                currentNote.updateTime = time
-                if (currentNote.id == 0L) {
-                    currentNote.creationTime = time
+                currentNote.apply {
+                    title = bindView.titleView.text.toString()
+                    content = bindView.contentView.text.toString()
+                    updateTime = time
+                    if (id == 0L) {
+                        creationTime = time
+                    }
                 }
                 viewModel.saveNote(currentNote)
             } else {
@@ -61,6 +72,16 @@ class NoteFragment : Fragment() {
                 Toast.makeText(context, "Something went wrong, please try again", Toast.LENGTH_SHORT).show()
             }
         })
+
+        viewModel.currentNote.observe(viewLifecycleOwner) { note ->
+            note?.let {
+                currentNote = it
+                bindView.apply {
+                    titleView.setText(it.title, TextView.BufferType.EDITABLE)
+                    contentView.setText(it.content, TextView.BufferType.EDITABLE)
+                }
+            }
+        }
     }
 
     private fun hideKeyboard() {
