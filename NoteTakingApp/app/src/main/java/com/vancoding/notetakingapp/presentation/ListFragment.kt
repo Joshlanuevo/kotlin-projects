@@ -12,10 +12,10 @@ import com.vancoding.notetakingapp.R
 import com.vancoding.notetakingapp.databinding.FragmentListBinding
 import com.vancoding.notetakingapp.viewmodel.NoteListViewModel
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), ListAction {
     private lateinit var bindView: FragmentListBinding
     private lateinit var viewModel: NoteListViewModel
-    private val notesListAdapter = NotesListAdapter(arrayListOf())
+    private val notesListAdapter = NotesListAdapter(arrayListOf(), this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,5 +57,9 @@ class ListFragment : Fragment() {
             bindView.noteListView.visibility = View.VISIBLE
             notesListAdapter.updateNotes(noteList.sortedByDescending { it.updateTime })
         }
+    }
+
+    override fun onClick(id: Long) {
+        goToNoteDetails(id)
     }
 }

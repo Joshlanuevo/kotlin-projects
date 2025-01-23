@@ -8,7 +8,10 @@ import com.vancoding.notetakingapp.databinding.ItemNoteBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class NotesListAdapter(var notes: ArrayList<Note>) : RecyclerView.Adapter<NotesListAdapter.NoteViewHolder>() {
+class NotesListAdapter(
+    var notes: ArrayList<Note>,
+    var actions: ListAction,
+) : RecyclerView.Adapter<NotesListAdapter.NoteViewHolder>() {
 
     fun updateNotes(newNotes: List<Note>) {
         notes.clear()
@@ -33,6 +36,7 @@ class NotesListAdapter(var notes: ArrayList<Note>) : RecyclerView.Adapter<NotesL
             val resultDate = Date(note.updateTime)
 
             binding.apply {
+                noteLayout.setOnClickListener { actions.onClick(note.id) }
                 title.text = note.title
                 content.text = note.content
                 date.text = "Last updated: ${sdf.format(resultDate)}"
