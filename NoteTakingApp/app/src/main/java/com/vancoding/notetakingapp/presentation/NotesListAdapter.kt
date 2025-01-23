@@ -39,6 +39,7 @@ class NotesListAdapter(
                 noteLayout.setOnClickListener { actions.onClick(note.id) }
                 title.text = note.title
                 content.text = note.content
+                wordCount.text = "Words: ${note.wordCount}"
                 date.text = "Last updated: ${sdf.format(resultDate)}"
             }
         }

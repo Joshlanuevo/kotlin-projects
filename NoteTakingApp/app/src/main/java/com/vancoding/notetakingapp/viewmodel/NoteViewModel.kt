@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NoteListViewModel(application: Application): AndroidViewModel(application) {
+class NoteViewModel(application: Application): AndroidViewModel(application) {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     @Inject
@@ -25,13 +25,27 @@ class NoteListViewModel(application: Application): AndroidViewModel(application)
             .inject(this)
     }
 
-    val noteList = MutableLiveData<List<Note>>()
+    val saved = MutableLiveData<Boolean>()
+    val currentNote = MutableLiveData<Note?>()
 
-    fun getNotes() {
+    fun saveNote(note: Note) {
         coroutineScope.launch {
-            val notes = useCases.getAllNotes()
-            notes.forEach { it.wordCount = useCases.getWordCount(it) }
-            noteList.postValue(notes)
+            useCases.addNote(note)
+            saved.postValue(true)
+        }
+    }
+
+    fun getNote(id: Long) {
+        coroutineScope.launch {
+            val note = useCases.getNote(id)
+            currentNote.postValue(note)
+        }
+    }
+
+    fun deleteNote(note: Note) {
+        coroutineScope.launch {
+            useCases.removeNote(note)
+            saved.postValue(true)
         }
     }
 }
