@@ -38,8 +38,12 @@ class ListFragment : Fragment() {
 
         bindView.addNote.setOnClickListener { goToNoteDetails() }
 
-        viewModel.getNotes()
         observeViewModel()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getNotes()
     }
 
     private fun goToNoteDetails(id: Long = 0L) {
